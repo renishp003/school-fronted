@@ -18,6 +18,7 @@ import ManageStudent from './Pages/ManageStudent/ManageStudent';
 import { getStudentData } from './Redux/Actions/studentAction';
 import { getSchoolData } from './Redux/Actions/schoolAction';
 import SuperAdminLogin from './LoginRegisterForms/superAdminForm/SuperAdminLogin';
+import SuperAdmin from './Rols/SuperAdmin/SuperAdmin';
 
 function App() {
   const [adminLogin, setadminLogin] = useState(localStorage.getItem('admin'))
@@ -78,7 +79,7 @@ function App() {
           }
         </Route>
 
-        <Route path="/superAdmin" element={<Admin />}>
+        <Route path="/superAdmin" element={<SuperAdmin />}>
           {
             superAdminLogin?
             <>

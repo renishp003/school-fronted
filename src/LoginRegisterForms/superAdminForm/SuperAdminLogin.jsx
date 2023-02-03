@@ -1,13 +1,24 @@
+import axios from 'axios';
 import React from 'react'
 import { useForm } from 'react-hook-form';
+import { ApiHttp, errorPopup, successPopup } from '../../Constant';
 
 function SuperAdminLogin() {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const LoginSuperAdmin = (data) => {
-      // localStorage.setItem('superAdmin',true);
-      // window.location.reload()
-      console.log(data)
+      
+
+      axios.post(`${ApiHttp}/superAdmin/login` , data).then((res) =>{
+        if(res.data.isSuccess){
+          successPopup(res.data.message)
+          localStorage.setItem('superAdmin',true);
+          window.location.href = '/superAdmin'
+        }
+        else{
+          errorPopup(res.data.message)
+        }
+      })
     }
   return (
     <>
