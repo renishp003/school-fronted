@@ -72,7 +72,15 @@ select option {
 .pointer_event_none{
     pointer-events: none;
 }
-
+.hover_Underline{
+    font-weight: 500;
+    color: #666b72;
+}
+.hover_Underline:hover{
+    text-decoration: underline;
+    color: #11161d;
+    font-weight: 500;
+}
 
 
 

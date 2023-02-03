@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Controller } from 'react-hook-form';
 import './TableCommon.css'
 
 function TableComman(props) {
@@ -8,12 +9,14 @@ function TableComman(props) {
   const convertDate = (date) => {
     return new Date(date).getDate() + '-' + (new Date(date).getMonth()+1) + '-' + new Date(date).getFullYear()
   }
+  console.log(props.deleteManyIdArray)
   return (
     <>
        <div className='table_div'>
        <table className='common_table'>
           <thead className='common_table_header'>
             <tr>
+                <th></th>
                 <th>No.</th>
                 <th>GR No.</th>
                 <th>Surname</th>
@@ -38,6 +41,7 @@ function TableComman(props) {
                 data?.map((x,i) => {
                   return(
                     <tr key={i}>
+                      <td><input type="checkbox" value={x._id} name='deleteManyId' checked={props.deleteManyIdArray.includes(x._id)} onChange={props.getDeleteManyId}/></td>
                       <td>{i+1}</td>
                       <td>{x.grno}</td>
                       <td>{x.surname}</td>
@@ -61,13 +65,14 @@ function TableComman(props) {
                   )
                 }):
                 <tr className='text-center'>
-                  <td colSpan='16'>There is no data in the table.</td>
+                  <td colSpan='17'>There is no data in the table.</td>
                 </tr>
 
             }
           </tbody>
        </table>
        </div>
+       
     </>
   )
 }

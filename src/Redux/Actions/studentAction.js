@@ -71,6 +71,22 @@ export const deleteSingleStudentData =  (id) => {
 }
 
 
+export const deleteMultipleStudentData =  (data) => {
+    return (dispatch) => {
+        dispatch(studentRequest());
+        axios.post(`${ApiHttp}/student/deleteMany` , {deleteManyId : data}).then(res => {
+            console.log(res)
+            if(res.data.isSuccess){
+                successPopup(res.data.message)
+                dispatch(getStudentData())
+            }
+            else{
+                errorPopup(res.data.message)
+            }
+        })
+    }
+}
+
 
 export const studentRequest = () => {
     return {

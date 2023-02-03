@@ -26,7 +26,6 @@ function Admin() {
         }
       </div>
     
-    {/* <NavLink to='signin'>Login</NavLink> */}
     <Outlet />
     </>
   )

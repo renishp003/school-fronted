@@ -3,7 +3,7 @@ import './ManageStudent.css'
 import { useDispatch, useSelector } from 'react-redux'
 import TableComman from '../../Components/TableCommon/TableComman'
 import { useForm } from 'react-hook-form';
-import { addStudentData, deleteSingleStudentData } from '../../Redux/Actions/studentAction';
+import { addStudentData, deleteMultipleStudentData, deleteSingleStudentData } from '../../Redux/Actions/studentAction';
 import AddStudentDialog from '../../Components/AddStudentDialog/AddStudentDialog';
 import Swal from 'sweetalert2';
 import { checkAdminPassword } from '../../Redux/Actions/adminAction';
@@ -18,7 +18,7 @@ function ManageStudent() {
   const [showAddNew, setshowAddNew] = useState(false)
   const [formValue, setformValue] = useState({recordNum:''})
   const [editObj, seteditObj] = useState({})
-
+  const [deleteManyIdArray, setdeleteManyIdArray] = useState([])
   // useEffect(() => {
   //   filterData({...formValue})
   // }, [allStudent])
@@ -104,6 +104,42 @@ function ManageStudent() {
       }
     })
   }
+  const deleteManyData = () => {
+    if(deleteManyIdArray.length == 0){
+      Swal.fire({
+        title: 'Not a single record selected!!',
+        confirmButtonText: 'OK',
+        confirmButtonColor:'#fa7305'
+      })
+    }
+    else{
+      dispatch(deleteMultipleStudentData(deleteManyIdArray))
+      setdeleteManyIdArray([])
+    }
+  }
+
+  const getDeleteManyId = (e) => {
+    if(e.target.checked && !deleteManyIdArray.includes(e.target.value)){
+        deleteManyIdArray.push(e.target.value)
+        setdeleteManyIdArray([...deleteManyIdArray])
+    }
+    else{
+      setdeleteManyIdArray([...deleteManyIdArray.filter(x => x != e.target.value)])
+    }
+  }
+
+  const selectAll = () => {
+    filterArray.forEach(x => {
+      if(!deleteManyIdArray.includes(x._id)){
+        deleteManyIdArray.push(x._id)
+        setdeleteManyIdArray([...deleteManyIdArray])
+    }
+    })
+  }
+
+  const cancelSelected = () => {
+    setdeleteManyIdArray([]);
+  }
   return (
     <>
        <div className='col-12 col-md-10 content_Wrapper'>
@@ -170,7 +206,15 @@ function ManageStudent() {
         </div>
         
 
-        <TableComman data={filterArray} deleteRecord={deleteRecord} editSingle={editSingle} />
+        {
+          deleteManyIdArray.length > 0 ? 
+          <span className='d-inline-block mb-3 cursor_pointer hover_Underline' onClick={() => cancelSelected()}>Cancel selected</span>
+          :
+          <span className='d-inline-block mb-3 cursor_pointer hover_Underline' onClick={() => selectAll()}>Select All</span>
+        }
+        <span className='mx-3'> | </span>
+        <span className='d-inline-block mb-3 cursor_pointer hover_Underline' onClick={() => deleteManyData()}> Delete selected </span>
+        <TableComman data={filterArray} deleteRecord={deleteRecord} editSingle={editSingle} getDeleteManyId={getDeleteManyId} deleteManyIdArray={deleteManyIdArray}/>
        </div>
        
 

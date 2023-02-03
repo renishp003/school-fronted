@@ -39,3 +39,11 @@
     background-color: #1b2531a2;
     border-radius: 10px;
 }
+
+
+  
+.table_div input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    accent-color: #1b2531;
+  }

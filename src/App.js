@@ -17,10 +17,12 @@ import { getAdminData } from './Redux/Actions/adminAction';
 import ManageStudent from './Pages/ManageStudent/ManageStudent';
 import { getStudentData } from './Redux/Actions/studentAction';
 import { getSchoolData } from './Redux/Actions/schoolAction';
+import SuperAdminLogin from './LoginRegisterForms/superAdminForm/SuperAdminLogin';
 
 function App() {
   const [adminLogin, setadminLogin] = useState(localStorage.getItem('admin'))
   const [teacherLogin, setteacherLogin] = useState(localStorage.getItem('teacher'))
+  const [superAdminLogin, setsuperAdminLogin] = useState(localStorage.getItem('superAdmin'))
   const allAdmin = useSelector(state =>  state.admin.admin)
   const dispatch = useDispatch()
   
@@ -71,6 +73,22 @@ function App() {
             <>
               <Route path="" element={<Navigate to='login' />}></Route>
               <Route path="login" element={<TeacherLogin />}></Route>
+              <Route path='*' element={<Navigate to='../login' />}></Route>
+            </>
+          }
+        </Route>
+
+        <Route path="/superAdmin" element={<Admin />}>
+          {
+            superAdminLogin?
+            <>
+              <Route path="" element={<Navigate to='dashboard' />}></Route>
+              <Route path="dashboard" element={<Dashboard />}></Route>
+            </>
+            :
+            <>
+              <Route path="" element={<Navigate to='login' />}></Route>
+              <Route path="login" element={<SuperAdminLogin />}></Route>
               <Route path='*' element={<Navigate to='../login' />}></Route>
             </>
           }
