@@ -1,0 +1,22 @@
+[
+    {
+        "displayText" : "Dashboard",
+        "link" : "dashboard",
+        "icon" : "dashboard"
+    },
+    {
+        "displayText" : "School",
+        "link" : "school",
+        "icon" : "school"
+    },
+    {
+        "displayText" : "Branch",
+        "link" : "branch",
+        "icon" : "buildings"
+    },
+    {
+        "displayText" : "Staff",
+        "link" : "staff",
+        "icon" : "user-account"
+    }
+]

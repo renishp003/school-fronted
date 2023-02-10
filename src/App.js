@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'boxicons'
 import Sidebar from './Components/Sidebar/Sidebar';
 import Student from './Rols/Student/Student';
 import Admin from './Rols/Admin/Admin';
@@ -19,6 +20,8 @@ import { getStudentData } from './Redux/Actions/studentAction';
 import { getSchoolData } from './Redux/Actions/schoolAction';
 import SuperAdminLogin from './LoginRegisterForms/superAdminForm/SuperAdminLogin';
 import SuperAdmin from './Rols/SuperAdmin/SuperAdmin';
+import AddSchool from './Components/AddSchool/AddSchool';
+import Branch from './Components/Branches/Branch';
 
 function App() {
   const [adminLogin, setadminLogin] = useState(localStorage.getItem('admin'))
@@ -85,6 +88,8 @@ function App() {
             <>
               <Route path="" element={<Navigate to='dashboard' />}></Route>
               <Route path="dashboard" element={<Dashboard />}></Route>
+              <Route path="school" element={<AddSchool />}></Route>
+              <Route path="branch" element={<Branch />}></Route>
             </>
             :
             <>

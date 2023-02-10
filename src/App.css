@@ -65,6 +65,7 @@ select option {
 }
 .Error_Message{
     color: red;
+    height: 10px;
 }
 .bg_theme_dark{
     background-color: #1b2531;
@@ -145,4 +146,21 @@ select option {
 }
 .page_card_header_icon:hover + .page_card_header_icon_section , .page_card_header_icon_section:hover {
     display: block;
+}
+.Login_Section{
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    min-width: 350px;
+    width: 450px;
+    height: fit-content;
+}
+.blank_card{
+    background-color: white;
+    border-radius: 10px;
+    box-shadow:  0px 5px 10px 2px rgba(88, 88, 88, 0.5);
+    padding: 15px;
+    margin-bottom: 20px;
 }

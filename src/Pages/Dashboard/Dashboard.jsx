@@ -4,7 +4,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 function Dashboard() {
   return (
-    <div className='col-10 content_Wrapper'>
+    <div className='col-12 col-md-10 content_Wrapper'>
       <h2 className='page_header'>Dashboard</h2>
 
       <div className='row g-4'>

@@ -19,6 +19,7 @@ function ManageStudent() {
   const [formValue, setformValue] = useState({recordNum:''})
   const [editObj, seteditObj] = useState({})
   const [deleteManyIdArray, setdeleteManyIdArray] = useState([])
+  const columnnArray = ['GR No.','Surname','Name','Father Name','Standard','Division','Fees','Batch','Email','Mobile','Address','Birth Date','Admission Date','Student Current Year','Action' ]
   // useEffect(() => {
   //   filterData({...formValue})
   // }, [allStudent])
@@ -150,7 +151,7 @@ function ManageStudent() {
             <button className='theme_btn_outline ms-2' onClick={() => setshowAddNew(!showAddNew)}>+ Add Multiple</button>
           </div>
         </div>
-        <div className={`filter_Student ${showAddNew ? 'd-block' : 'd-none'}`} style={{animation: "anim .3s ease-in-out"}}>
+        <div className={`blank_card ${showAddNew ? 'd-block' : 'd-none'}`} style={{animation: "anim .3s ease-in-out"}}>
           <h5 className='mb-3'><b>Add new student</b></h5>
           <form action="">
           <div className='row align-items-center'>
@@ -166,7 +167,7 @@ function ManageStudent() {
           </form>
         </div>
 
-        <div className='filter_Student'>
+        <div className='blank_card'>
         <h5 className='mb-3'><b>Select to filter student data</b></h5>
           <div className='row align-items-center'>
             <div className='col-4'>
@@ -214,7 +215,7 @@ function ManageStudent() {
         }
         <span className='mx-3'> | </span>
         <span className='d-inline-block mb-3 cursor_pointer hover_Underline' onClick={() => deleteManyData()}> Delete selected </span>
-        <TableComman data={filterArray} deleteRecord={deleteRecord} editSingle={editSingle} getDeleteManyId={getDeleteManyId} deleteManyIdArray={deleteManyIdArray}/>
+        <TableComman data={filterArray} deleteRecord={deleteRecord} editSingle={editSingle} getDeleteManyId={getDeleteManyId} deleteManyIdArray={deleteManyIdArray} columnnArray={columnnArray}/>
        </div>
        
 

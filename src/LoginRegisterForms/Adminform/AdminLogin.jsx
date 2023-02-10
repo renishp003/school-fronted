@@ -31,7 +31,7 @@ function AdminLogin() {
   }
   return (
     <>
-    <div className='Login_Section_Wrapper'>
+    <div className='content_Wrapper'>
      <div className='page_card Login_Section'>
        <h4 className='page_card_header py-2'>ADMIN LOGIN</h4>
        <form action="" className={`px-3 pb-4 pt-2 ${nextDialog ? 'd-none' : 'd-block'}`} onSubmit={handleSubmit(SchoolAndBranch)}>

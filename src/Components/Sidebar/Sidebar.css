@@ -17,6 +17,7 @@
     margin: 5px auto;
     font-size: 14px;
     border-radius: 30px;
+    white-space: nowrap;
 }
 .menu a:hover{
     background-color: rgba(240, 248, 255, 0.116);
@@ -25,7 +26,6 @@
 }
 .menu  .active{
     background-color: rgba(240, 248, 255, 0.116);
-    color: white;
     color: #F08A1D;
 }
 .logout_btn{

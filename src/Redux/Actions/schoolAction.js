@@ -6,12 +6,20 @@ export const getSchoolData = () => {
     return (dispatch) => {
         dispatch(schoolRequest());
         axios.get(`${ApiHttp}/school/get`).then(res => {
-           const data = res.data.data
+            const data = res.data.data
+            console.log(data);
            dispatch(schoolSuccess(data))
         })
     }
 }
-
+export const addSchoolData = (data) => {
+    return (dispatch) => {
+        dispatch(schoolRequest());
+        axios.post(`${ApiHttp}/school/add` , data).then(res => {
+           dispatch(getSchoolData())
+        })
+    }
+}
 
 export const schoolRequest = () => {
     return {

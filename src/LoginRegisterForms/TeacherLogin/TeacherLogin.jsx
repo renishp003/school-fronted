@@ -10,8 +10,8 @@ function TeacherLogin() {
     console.log(data)
   }
   return (
-    <div className='Teacher_Section_Wrapper'>
-     <div className='page_card Teacher_Section'>
+    <div className='content_Wrapper'>
+     <div className='page_card Login_Section'>
        <h4 className='page_card_header py-2'>TEACHER LOGIN</h4>
        <form action="" className='px-3 pb-4 pt-2' onSubmit={handleSubmit(LoginTeacher)}>
 

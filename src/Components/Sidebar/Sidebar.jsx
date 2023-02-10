@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import './Sidebar.css'
+import './Sidebar.css';
+import adminRoute from '../../json_data/admin_route.json'
+import superAdminRoute from '../../json_data/super_admin_route.json'
+import teacherRoute from '../../json_data/teacher_route.json'
 
 function Sidebar(props) {
+  const [RouteData, setRouteData] = useState([])
+  useEffect(() => {
+    if(props.pathName =='superAdmin')
+    {
+      setRouteData([...superAdminRoute])
+    }
+    else if(props.pathName =='admin'){
+      setRouteData([...superAdminRoute])
+    }
+    else if(props.pathName =='teacher'){
+      setRouteData([...teacherRoute])
+    }
+  }, [])
+  
 
-  const navigate = useNavigate()
 
   const LogoutUser = () => {
     Swal.fire({
@@ -42,11 +58,11 @@ function Sidebar(props) {
             </div>
             <hr className='text-white my-4' />
             <div className='menu'>
-              <NavLink to={`/${props.pathName}/dashboard`}><span>Dashboard</span></NavLink>
-              <NavLink to={`/${props.pathName}/staff`}><span>Staff</span></NavLink>
-              <NavLink to={`/${props.pathName}/student`}><span>Students</span></NavLink>
-              <NavLink to={`/${props.pathName}/staff`}><span>Fees</span></NavLink>
-              <NavLink to={`/${props.pathName}/staff`}><span>Staff</span></NavLink>
+              {
+                RouteData?.map((x,i) => {
+                  return  <NavLink key={i} to={`/${props.pathName}/${x.link}`}><box-icon type='solid' color='#F08A1D' size='xs' name={x.icon}></box-icon><span className='ms-1'>{x.displayText}</span></NavLink>
+                })
+              }
             </div>
             <hr className='text-white my-4' />
             <div className='menu'>

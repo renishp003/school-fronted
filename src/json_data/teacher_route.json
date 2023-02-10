@@ -1,0 +1,17 @@
+[
+    {
+        "displayText" : "Dashboard",
+        "link" : "dashboard",
+        "icon" : "dashboard"
+    },
+    {
+        "displayText" : "Student",
+        "link" : "student",
+        "icon" : "user-circle"
+    },
+    {
+        "displayText" : "Home Work",
+        "link" : "HW",
+        "icon" : "book-open"
+    }
+]

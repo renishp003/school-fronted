@@ -1,0 +1,22 @@
+[
+    {
+        "displayText" : "Dashboard",
+        "link" : "dashboard",
+        "icon" : "dashboard"
+    },
+    {
+        "displayText" : "Staff",
+        "link" : "staff",
+        "icon" : "user-account"
+    },
+    {
+        "displayText" : "Student",
+        "link" : "student",
+        "icon" : "user-circle"
+    },
+    {
+        "displayText" : "Fees",
+        "link" : "fees",
+        "icon" : "book-open"
+    }
+]

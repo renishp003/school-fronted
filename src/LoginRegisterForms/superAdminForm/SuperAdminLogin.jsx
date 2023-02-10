@@ -13,7 +13,9 @@ function SuperAdminLogin() {
         if(res.data.isSuccess){
           successPopup(res.data.message)
           localStorage.setItem('superAdmin',true);
-          window.location.href = '/superAdmin'
+          setTimeout(() => {
+            window.location.href = '/superAdmin';
+          }, 2500);
         }
         else{
           errorPopup(res.data.message)
@@ -22,8 +24,8 @@ function SuperAdminLogin() {
     }
   return (
     <>
-    <div className='Teacher_Section_Wrapper'>
-     <div className='page_card Teacher_Section'>
+    <div className='content_Wrapper'>
+     <div className='page_card Login_Section'>
        <h4 className='page_card_header py-2'>SUPER ADMIN LOGIN</h4>
        <form action="" className='px-3 pb-4 pt-2' onSubmit={handleSubmit(LoginSuperAdmin)}>
 
