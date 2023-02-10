@@ -37,7 +37,6 @@ function ManageStudent() {
     else{
       setfilterArray([...allStudent.filter((x) => (x.standard == data.standard) && (x.division == data.division))])
     }
-    console.log(filterArray)
   }
   const addStudent = (e) => {
     e.preventDefault()

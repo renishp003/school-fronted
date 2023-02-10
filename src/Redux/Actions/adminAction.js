@@ -14,17 +14,30 @@ export const getAdminData = () => {
     }
 }
 
+export const addAdminData = (data) => {
+    return (dispatch) => {
+        dispatch(adminRequest());
+        axios.post(`${ApiHttp}/admin/add` , data).then(res => {
+            if(res.data.isSuccess){
+                successPopup(res.data.message)
+                dispatch(getAdminData())
+           }
+           else{
+                errorPopup(res.data.message)
+           }
+        })
+    }
+}
+
 export const checkAdminPassword = async(password) => {
     let aa  =  await axios.post(`${ApiHttp}/admin/checkAdminPassword` , {password:password} , headers)
     return aa
 }
 
 export const adminLogin = (value) => {
-    console.log(value)
     return async (dispatch) => {
         dispatch(adminRequest());
         await axios.post(`${ApiHttp}/admin/login` , value).then(res => {
-           console.log(res)
            if(res.data.isSuccess == true){
                localStorage.setItem('admin' , res.data.token);
                Swal.fire({

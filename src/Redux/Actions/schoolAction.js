@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ApiHttp } from "../../Constant";
+import { ApiHttp, errorPopup, successPopup } from "../../Constant";
 import { SCHOOL_REQUEST , SCHOOL_SUCCESS, SCHOOL_FAILUER } from "../types/type";
 
 export const getSchoolData = () => {
@@ -7,7 +7,6 @@ export const getSchoolData = () => {
         dispatch(schoolRequest());
         axios.get(`${ApiHttp}/school/get`).then(res => {
             const data = res.data.data
-            console.log(data);
            dispatch(schoolSuccess(data))
         })
     }
@@ -17,6 +16,12 @@ export const addSchoolData = (data) => {
         dispatch(schoolRequest());
         axios.post(`${ApiHttp}/school/add` , data).then(res => {
            dispatch(getSchoolData())
+           if(res.isSuccess){
+            successPopup(res.message)
+           }
+           else{
+            errorPopup(res.message)
+           }
         })
     }
 }

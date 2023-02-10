@@ -26,7 +26,6 @@ export const addStudentData =  (value) => {
     return (dispatch) => {
         dispatch(studentRequest());
         axios.post(`${ApiHttp}/student/addMultiple` , value , headers).then(res => {
-            console.log(res)
             if(res.data.isSuccess){
                 successPopup(res.data.message)
                 dispatch(getStudentData())
@@ -42,7 +41,6 @@ export const addSingleStudentData =  (value) => {
     return (dispatch) => {
         dispatch(studentRequest());
         axios.post(`${ApiHttp}/student/addOne` , value , headers).then(res => {
-            console.log(res)
             if(res.data.isSuccess){
                 dispatch(getStudentData())
                 successPopup(res.data.message)
@@ -58,7 +56,6 @@ export const deleteSingleStudentData =  (id) => {
     return (dispatch) => {
         dispatch(studentRequest());
         axios.delete(`${ApiHttp}/student/deleteOne?id=${id}`).then(res => {
-            console.log(res)
             if(res.data.isSuccess){
                 successPopup(res.data.message)
                 dispatch(getStudentData())
@@ -75,7 +72,6 @@ export const deleteMultipleStudentData =  (data) => {
     return (dispatch) => {
         dispatch(studentRequest());
         axios.post(`${ApiHttp}/student/deleteMany` , {deleteManyId : data}).then(res => {
-            console.log(res)
             if(res.data.isSuccess){
                 successPopup(res.data.message)
                 dispatch(getStudentData())

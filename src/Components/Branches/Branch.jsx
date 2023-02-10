@@ -4,27 +4,34 @@ import { useDispatch, useSelector } from 'react-redux';
 import TableComman from '../TableCommon/TableComman';
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
+import { addSchoolData } from '../../Redux/Actions/schoolAction';
+import { addAdminData } from '../../Redux/Actions/adminAction';
 
 function Branch() {
     const formSchema = Yup.object().shape({
         password: Yup.string()
             .required("Password is required")
-            .min(4, "Password length should be at least 4 characters")
-            .max(12, "Password cannot exceed more than 12 characters"),
+            .min(6, "Password must be more than 6 characters"),
         confirmPassword: Yup.string()
             .required("Confirm Password is required")
-            .min(4, "Password length should be at least 4 characters")
-            .max(12, "Password cannot exceed more than 12 characters")
-            .oneOf([Yup.ref("password")], "Passwords do not match")
+            .min(6, "Password must be more than 6 characters")
+            .oneOf([Yup.ref("password")], "Passwords do not match"),
+        branch: Yup.string()
+            .required("Branch is required")
+           . matches(/^[a-zA-Z0-9- \s]+$/, "Only accept in number or characters "),
+        schoolId: Yup.string()
+            .required("Please select school"),
+        email: Yup.string()
+            .required("Email is required"),
     });
 
     const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm({ mode: "onTouched", resolver: yupResolver(formSchema) });
     const allSchoolData = useSelector(state => state.school.school)
+    const allBranchData = useSelector(state => state.admin.admin)
     const dispatch = useDispatch()
-    const columnnArray = ['schoolName']
+    const columnnArray = ['email' , 'branch']
     const addNewBranch = (data) => {
-        // dispatch(addSchoolData(data))
-        console.log(data)
+        dispatch(addAdminData(data))
     }
     return (
         <>
@@ -37,7 +44,7 @@ function Branch() {
                             <div className='col-6'>
                                 <label htmlFor="" className='form_label mt-0'>Branch Name</label>
                                 <input type="text" className='text_input' placeholder='ex: Vivekanand-2' {...register("branch", { required: true, validate: (value) => { return !!value.trim() } })} />
-                                <p className='Error_Message'>{errors.branch && <span>Branch name is required</span>}</p>
+                                <p className='Error_Message'>{errors.branch && <span>{errors.branch.message}</span>}</p>
                             </div>
                             <div className='col-6'>
                                 <label htmlFor="" className='form_label mt-0'>Select school</label>
@@ -49,7 +56,7 @@ function Branch() {
                                         })
                                     }
                                 </select>
-                                <p className='Error_Message'>{errors.schoolId && <span>Select school name</span>}</p>
+                                <p className='Error_Message'>{errors.schoolId && <span>{errors.schoolId.message}</span>}</p>
                             </div>
                             <div className='col-4'>
                                 <label htmlFor="" className='form_label mt-0'>Email</label>
@@ -59,7 +66,7 @@ function Branch() {
                             <div className='col-4'>
                                 <label htmlFor="" className='form_label mt-0'>Password</label>
                                 <input type="Password" name='password' className='text_input' placeholder='ex: example@123' {...register("password", { required: true, validate: (value) => { return !!value.trim() } })} />
-                                <p className='Error_Message'>{errors.password && <span>Password is required</span>}</p>
+                                <p className='Error_Message'>{errors.password && <span>{errors.password.message}</span>}</p>
                             </div>
                             <div className='col-4'>
                                 <label htmlFor="" className='form_label mt-0'>Confirm Password</label>
@@ -69,7 +76,7 @@ function Branch() {
                                         return password === value || "Passwords should match!";
                                     }
                                 })} />
-                                <p className='Error_Message'>{errors.confirmPassword && <span>Confirm Password is required {errors.confirmPassword.message}</span>}</p>
+                                <p className='Error_Message'>{errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}</p>
                             </div>
                             <div className='col-12 mt-3'>
                                 <input type='submit' className='theme_btn' value='Add' onClick={handleSubmit(addNewBranch)}></input>
@@ -79,7 +86,7 @@ function Branch() {
                     </form>
                 </div>
 
-                <TableComman data={allSchoolData} columnnArray={columnnArray} />
+                <TableComman data={allBranchData} columnnArray={columnnArray} />
             </div>
         </>
     )

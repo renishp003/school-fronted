@@ -7,7 +7,6 @@ function TeacherLogin() {
   const LoginTeacher = (data) => {
     // localStorage.setItem('teacher',true);
     // window.location.reload()
-    console.log(data)
   }
   return (
     <div className='content_Wrapper'>

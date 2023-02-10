@@ -16,11 +16,9 @@ function AdminLogin() {
   const dispatch = useDispatch()
   const [nextDialog, setnextDialog] = useState(false)
   const LoginAdmin = (data) => {
-  dispatch(adminLogin({...data , branchId : getValues('branchId') , schoolId :getValues('schoolId') }))
-    console.log(getValues('schoolId'))
+    dispatch(adminLogin({...data , branchId : getValues('branchId') , schoolId :getValues('schoolId') }))
   }
   const SchoolAndBranch = (data) => {
-    console.log(data)
     setnextDialog(true)
   }
 

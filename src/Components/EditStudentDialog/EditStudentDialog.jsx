@@ -19,7 +19,6 @@ function EditStudentDialog(props) {
     }
 
     useEffect(() => {
-        console.log(props.editObj);
       if(props.editObj){
         for(let key in props.editObj){
             if(key == 'fees'){
@@ -35,7 +34,6 @@ function EditStudentDialog(props) {
     
     const editStudent = (data) => {
         // dispatch(addSingleStudentData(data));
-        console.log(data);
         // reset()
         // CancelForm();
     }
