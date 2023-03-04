@@ -1,13 +1,15 @@
-import React from 'react'
-import Header from '../../Components/Header/Header'
+import React from "react";
+import EnrollTopNav from "../../Components/EnrollTopNav/EnrollTopNav";
+import Header from "../../Components/Header/Header";
 
 function About() {
   return (
     <>
-    <Header />
-    <h2>about</h2>
+      <EnrollTopNav />
+      <Header />
+      <h2>about</h2>
     </>
-  )
+  );
 }
 
-export default About
+export default About;

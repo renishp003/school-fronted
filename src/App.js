@@ -1,109 +1,47 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'boxicons'
-import Sidebar from './Components/Sidebar/Sidebar';
-import Student from './Rols/Student/Student';
-import Admin from './Rols/Admin/Admin';
-import Teacher from './Rols/Teacher/Teacher';
-import Dashboard from './Pages/Dashboard/Dashboard';
-import Staff from './Pages/Staff/Staff';
-import Page404 from './Pages/Page404/Page404';
-import About from './Pages/About/About';
-import AdminLogin from './LoginRegisterForms/Adminform/AdminLogin';
-import TeacherLogin from './LoginRegisterForms/TeacherLogin/TeacherLogin';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminData } from './Redux/Actions/adminAction';
-import ManageStudent from './Pages/ManageStudent/ManageStudent';
-import { getStudentData } from './Redux/Actions/studentAction';
+import { getStudentDataByToken } from './Redux/Actions/studentAction';
 import { getSchoolData } from './Redux/Actions/schoolAction';
-import SuperAdminLogin from './LoginRegisterForms/superAdminForm/SuperAdminLogin';
-import SuperAdmin from './Rols/SuperAdmin/SuperAdmin';
-import AddSchool from './Components/AddSchool/AddSchool';
-import Branch from './Components/Branches/Branch';
+import 'react-calendar/dist/Calendar.css';
+import Routing from './Components/Routing/Routing';
+import NetworkError from './Components/NetworkError/NetworkError';
 
 function App() {
-  const [adminLogin, setadminLogin] = useState(localStorage.getItem('admin'))
-  const [teacherLogin, setteacherLogin] = useState(localStorage.getItem('teacher'))
-  const [superAdminLogin, setsuperAdminLogin] = useState(localStorage.getItem('superAdmin'))
-  const allAdmin = useSelector(state =>  state.admin.admin)
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const dispatch = useDispatch()
   
   useEffect(() => {
      dispatch(getAdminData())
-     dispatch(getStudentData())
+    //  dispatch(getStudentData())
      dispatch(getSchoolData())
-  }, [])
+     dispatch(getStudentDataByToken())
+  },[])
+  useEffect(() => {
+    const handleStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener('online', handleStatusChange);
+
+    window.addEventListener('offline', handleStatusChange);
+
+    return () => {
+      window.removeEventListener('online', handleStatusChange);
+      window.removeEventListener('offline', handleStatusChange);
+    };
+  }, [isOnline]);
   
   return (
     <>
-    <BrowserRouter>
-    <div className='row m-0 g-0'>
-      <Routes>
-        <Route path="/" element={<Student />} />
-        <Route path="/" >
-          <Route path="about" element={<About />}></Route>
-        </Route>
-
-        <Route path="/admin" element={<Admin />}>
-          {
-            adminLogin?
-            <>
-              <Route path="" element={<Navigate to='dashboard' />}></Route>
-              <Route path="dashboard" element={<Dashboard />}></Route>
-              <Route path="student" element={<ManageStudent />}></Route>
-              <Route path="staff" element={<Staff />}></Route>
-              <Route path='*' element={<Navigate to='../dashboard' />}></Route>
-            </>
-            :
-            <>
-              <Route path="" element={<Navigate to='login' />}></Route>
-              <Route path="login" element={<AdminLogin />}></Route>
-              <Route path='*' element={<Navigate to='../login' />}></Route>
-            </>
-          }
-        </Route>
-        
-        <Route path="/teacher" element={<Teacher />} >
-          {
-            teacherLogin ?
-            <>
-              <Route path="" element={<Navigate to='dashboard' />}></Route>
-              <Route path="dashboard" element={<Dashboard />}></Route>
-              <Route path='*' element={<Navigate to='../dashboard' />}></Route>
-            </>
-            :
-            <>
-              <Route path="" element={<Navigate to='login' />}></Route>
-              <Route path="login" element={<TeacherLogin />}></Route>
-              <Route path='*' element={<Navigate to='../login' />}></Route>
-            </>
-          }
-        </Route>
-
-        <Route path="/superAdmin" element={<SuperAdmin />}>
-          {
-            superAdminLogin?
-            <>
-              <Route path="" element={<Navigate to='dashboard' />}></Route>
-              <Route path="dashboard" element={<Dashboard />}></Route>
-              <Route path="school" element={<AddSchool />}></Route>
-              <Route path="branch" element={<Branch />}></Route>
-            </>
-            :
-            <>
-              <Route path="" element={<Navigate to='login' />}></Route>
-              <Route path="login" element={<SuperAdminLogin />}></Route>
-              <Route path='*' element={<Navigate to='../login' />}></Route>
-            </>
-          }
-        </Route>
-
-        <Route path='*' element={<Page404 />}></Route>
-      </Routes>
-      </div>
-    </BrowserRouter>
+    {
+      isOnline ? 
+      <Routing /> 
+      :<NetworkError />
+    }
     </>
   );
 }

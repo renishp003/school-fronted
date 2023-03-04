@@ -107,7 +107,7 @@ function EditStudentDialog(props) {
 
             <div className='col-6'>
               <label className='form_label'>GR Number</label>
-              <input type="text" name='grno' className='text_input' placeholder='ex: 202307' {...register("grno", { required: true })}  />
+              <input type="text" name='grno' className='text_input pointer_event_none' placeholder='ex: 202307' {...register("grno", { required: true })}  />
               <p className='Error_Message'>{errors.grno && <span>GR No. is required</span>}</p>
             </div>
 

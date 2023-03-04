@@ -1,4 +1,11 @@
 @import "react-slideshow-image/dist/styles.css";
+
+:root{
+    /* --bg-blue : #0c1d3d; */
+    --bg-blue : #183e80;
+    --bg-orange : #F08A1D;
+    --bg-dark-blue : #1d2d42;
+}
 /* --Root class -- */
 .form_label{
     font-weight: 500;
@@ -9,6 +16,7 @@
 .text_input{
    width: 100%;
    padding: 7px 10px;
+   /* border: 1px solid rgb(63, 36, 121); */
    border: 1px solid rgb(0, 0, 0);
 }
 .text_input:focus{
@@ -39,7 +47,7 @@ select option {
     background-color: #fa7305;
 }
 .theme_btn_dark{
-    background-color: #1b2531;
+    background-color: var(--bg-dark-blue);
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -50,17 +58,17 @@ select option {
 }
 .theme_btn_outline{
     background-color: transparent;
-    color: #1b2531;
+    color: var(--bg-dark-blue);
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
-    border: 1px solid #1b2531;
+    border: 1px solid var(--bg-dark-blue);
     font-weight: 500;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
     transition: 0.3s;
 }
 .theme_btn_outline:hover{
-    background-color: #1b2531;
+    background-color: var(--bg-dark-blue);
     color: white;
 }
 .Error_Message{
@@ -68,10 +76,13 @@ select option {
     height: 10px;
 }
 .bg_theme_dark{
-    background-color: #1b2531;
+    background-color: var(--bg-dark-blue);
 }
 .pointer_event_none{
     pointer-events: none;
+    cursor: none;
+    color: #585451;
+    border:1px solid #a3a3a2 ;
 }
 .hover_Underline{
     font-weight: 500;
@@ -82,12 +93,36 @@ select option {
     color: #11161d;
     font-weight: 500;
 }
-
-
-
-
-
-
+.hover_line:hover{
+    text-decoration: underline;
+}
+.border_none{
+    border: none !important;
+}
+.hover_scal:hover{
+    transform: translateY(-15px);
+    transition: 0.7s;
+}
+.section_heading{
+    font-family: cursive !important;
+    letter-spacing: 1px;
+}
+.quickLink{
+    font-size: 20px;
+    transition: 0.3s;
+    color: white;
+    cursor: pointer;
+}
+.quickLink:hover{
+    color: #fa7305;
+}
+.student_Profile_Image{
+    width: 200px;
+    border-radius: 50%;
+    height: 200px;
+    background-size: cover;
+    background-position: center center;
+}
 
 
 
@@ -109,12 +144,12 @@ select option {
     background-color: white ;
     border-radius: 10px;
     overflow: hidden;
-    height: 380px;
+    height: 345px;
     box-shadow: 0px 5px 10px 2px rgba(88, 88, 88, 0.5);
 }
 
 .page_card .page_card_header{
-    background-color: #1b2531 ;
+    background-color: var(--bg-dark-blue) ;
     color: white;
     font-weight: 400;
     padding: 7px 10px;
@@ -153,7 +188,6 @@ select option {
     top: 50%;
     left: 50%;
     transform: translate(-50% , -50%);
-    min-width: 350px;
     width: 450px;
     height: fit-content;
 }
@@ -164,3 +198,17 @@ select option {
     padding: 15px;
     margin-bottom: 20px;
 }
+
+.react-calendar{
+    width: 100% !important;
+    height: 100% !important;
+}
+.border_radius_50{
+    border-radius: 50%;
+}
+
+@media only screen and (max-width: 455px) {
+    .Login_Section{
+        width: 95%;
+    }
+  }

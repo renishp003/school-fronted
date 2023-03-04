@@ -18,5 +18,10 @@
         "displayText" : "Fees",
         "link" : "fees",
         "icon" : "book-open"
+    },
+    {
+        "displayText" : "Enquiries",
+        "link" : "enquiries",
+        "icon" : "book-open"
     }
 ]

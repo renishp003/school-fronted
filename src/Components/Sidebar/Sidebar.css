@@ -1,5 +1,5 @@
 .sidebar{
-    background-color: #1b2531;
+    background-color: var(--bg-dark-blue);
     min-height: 100vh;
     height: 100%;
 }
@@ -42,4 +42,24 @@
 
 .swal2-default-outline{
     box-shadow: none !important;
+}
+
+.responsive_menu a{
+    color: white;
+    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    border-radius: 50%;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+.responsive_menu  a:hover{
+    background-color: rgba(240, 248, 255, 0.116);
+    color: white;
+}
+.responsive_menu .active{
+    background-color: rgba(240, 248, 255, 0.116);
+    color: #F08A1D;
 }

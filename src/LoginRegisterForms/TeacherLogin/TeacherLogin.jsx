@@ -6,6 +6,8 @@ function TeacherLogin() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const LoginTeacher = (data) => {
     // localStorage.setItem('teacher',true);
+          localStorage.removeItem('admin');
+          localStorage.removeItem('superAdmin');
     // window.location.reload()
   }
   return (

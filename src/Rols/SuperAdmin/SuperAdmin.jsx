@@ -6,12 +6,6 @@ import { ApiHttp, getschoolName } from '../../Constant'
 
 function SuperAdmin() {
   const [schoolName, setschoolName] = useState('Super Admin')
-
-//   useEffect(async () => {
-//     let schoolObj = await getschoolName();
-//     setschoolName(schoolObj.schoolName)
-//   }, [])
-
   
   return (
     <>

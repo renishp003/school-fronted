@@ -1,28 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css'
 import { GiBookmarklet ,GiHamburgerMenu } from "react-icons/gi";
 import { NavLink } from 'react-router-dom';
 
 
 function Header() {
+  // const [studentLogin, setstudentLogin] = useState(localStorage.getItem('student'))
+  let studentLogin = localStorage.getItem('student')
+  let adminLogin = localStorage.getItem('admin')
+  let schoolLogin = localStorage.getItem('superAdmin')
+  const [accountRoute, setaccountRoute] = useState('superAdmin')
+  // if(studentLogin){
+  //   setaccountRoute('/account')
+  // }
+  // else if(adminLogin){
+  //   setaccountRoute('/admin')
+  // }
+  // else if(schoolLogin){
+  //   setaccountRoute('/superAdmin')
+  // }
+  // else{
+
+  // }
   return (
     <>
-      <div class="header">
+      <div className="header">
         <div className='row m-0 h-100 align-items-center justify-content-between'>
-          <div className='col-6 col-xxl-6 col-md-4 col-sm-8'>
+        <div className='col-0 col-md-1  cursor_pointer' style={{marginTop:'-10px'}}>
+             
+          </div>
+          <div className='col-6 col-xxl-5 col-md-3 col-sm-8'>
             <div className='logo_Section'>
-              {/* <GiBookmarklet size={40} color="black"/>
-              <span className='ms-2 d-block'>
-                <span style={{color:'darkorchid'}}>P</span>
-                <span style={{color:'green'}}>r</span>
-                <span style={{color:'yellow'}}>e</span>
-                <span style={{color:'pink'}}> S</span>
-                <span style={{color:'red'}}>c</span>
-                <span style={{color:'purple'}}>h</span>
-                <span style={{color:'blue'}}>O</span>
-                <span style={{color:'white'}}>o</span>
-                <span style={{color:'greenyellow'}}>l</span>
-              </span> */}
               <img src="/images/logo1.png" alt="" height='60px' />
             </div>
           </div>
@@ -34,14 +42,24 @@ function Header() {
                 <NavLink to='/sd'><span>Our Programs</span></NavLink>
                 <NavLink to='/about'><span>Activity Rooms</span></NavLink>
                 <NavLink to='/about'><span>Contact</span></NavLink>
-                <div className='login_btn d-flex' style={{width:'10%'}}>
-                  <NavLink to='/about' ><span>Login</span></NavLink>
-                </div>
+                {
+                  (studentLogin || schoolLogin || adminLogin) ? 
+                  <>
+                    <div className='login_btn d-flex' style={{width:'10%'}}>
+                      <NavLink to={accountRoute} ><span>Account</span></NavLink>
+                    </div>
+                  </>:
+                  <>
+                    <div className='login_btn d-flex' style={{width:'10%'}}>
+                      <NavLink to='/login' ><span>Login</span></NavLink>
+                    </div>
+                  </>
+                }
               </div>
             </div>
           </div>
           <div className='col-1 d-block d-md-none cursor_pointer' style={{marginTop:'-10px'}}>
-             <GiHamburgerMenu />
+             <GiHamburgerMenu color='white' />
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ function ManageStudent() {
   const [formValue, setformValue] = useState({recordNum:''})
   const [editObj, seteditObj] = useState({})
   const [deleteManyIdArray, setdeleteManyIdArray] = useState([])
-  const columnnArray = ['GR No.','Surname','Name','Father Name','Standard','Division','Fees','Batch','Email','Mobile','Address','Birth Date','Admission Date','Student Current Year','Action' ]
+  const columnnArray = ['grno','surname','name','fatherName','mobile','standard','fees','batch','address','birthDate','admissionDate','studentCurrentYear','email','division']
   // useEffect(() => {
   //   filterData({...formValue})
   // }, [allStudent])
@@ -71,7 +71,7 @@ function ManageStudent() {
 
   }
 
-  const deleteRecord = (id) => {
+  const deleteRecord = (deleteId) => {
     Swal.fire({
       title: 'Enter your account password to delete record',
       input: 'password',
@@ -88,7 +88,13 @@ function ManageStudent() {
           let data  = await checkAdminPassword(password)
           if(data.data.isSuccess)
           {
-            dispatch(deleteSingleStudentData(id))
+            if(typeof deleteId == 'string')
+            {
+              dispatch(deleteSingleStudentData(deleteId))
+            }
+            else{
+              dispatch(deleteMultipleStudentData(deleteId))
+            }
           }
           else{
             Swal.showValidationMessage(
@@ -113,7 +119,7 @@ function ManageStudent() {
       })
     }
     else{
-      dispatch(deleteMultipleStudentData(deleteManyIdArray))
+      deleteRecord(deleteManyIdArray)
       setdeleteManyIdArray([])
     }
   }
@@ -142,11 +148,11 @@ function ManageStudent() {
   }
   return (
     <>
-       <div className='col-12 col-md-10 content_Wrapper'>
+       <div className='col-11 col-md-10 content_Wrapper'>
         <div className='d-flex justify-content-between align-items-center mb-2'>
           <h2 className='page_header'>Student</h2>
           <div>
-            <button className='theme_btn_outline' style={{backgroundColor:'#1b2531' ,color:'white'}} onClick={() => addSingle()}>+ Add One</button>
+            <button className='theme_btn_outline' style={{backgroundColor:'var(--bg-dark-blue)' ,color:'white'}} onClick={() => addSingle()}>+ Add One</button>
             <button className='theme_btn_outline ms-2' onClick={() => setshowAddNew(!showAddNew)}>+ Add Multiple</button>
           </div>
         </div>
@@ -214,7 +220,7 @@ function ManageStudent() {
         }
         <span className='mx-3'> | </span>
         <span className='d-inline-block mb-3 cursor_pointer hover_Underline' onClick={() => deleteManyData()}> Delete selected </span>
-        <TableComman data={filterArray} deleteRecord={deleteRecord} editSingle={editSingle} getDeleteManyId={getDeleteManyId} deleteManyIdArray={deleteManyIdArray} columnnArray={columnnArray}/>
+        <TableComman data={filterArray} deleteRecord={deleteRecord} editSingle={editSingle} getDeleteManyId={getDeleteManyId} deleteManyIdArray={deleteManyIdArray} columnnArray={columnnArray} isAction={true} isDeleteAll={true}/>
        </div>
        
 

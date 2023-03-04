@@ -15,10 +15,22 @@ const headers = {
 export const getStudentData = () => {
     return (dispatch) => {
         dispatch(studentRequest());
-        axios.get(`${ApiHttp}/student/get`).then(res => {
+        axios.get(`${ApiHttp}/student/getAll`).then(res => {
            const data = res.data.data
-           dispatch(studentSuccess(data))
+        //    dispatch(studentSuccess(data))
         })
+    }
+}
+
+export const getStudentDataByToken = () => {
+    return (dispatch) => {
+        dispatch(studentRequest());
+        if(token){
+            axios.get(`${ApiHttp}/student/getByToken` , headers).then(res => {
+               const data = res.data.data
+               dispatch(studentSuccess(data))
+            })
+        }
     }
 }
 
@@ -28,7 +40,7 @@ export const addStudentData =  (value) => {
         axios.post(`${ApiHttp}/student/addMultiple` , value , headers).then(res => {
             if(res.data.isSuccess){
                 successPopup(res.data.message)
-                dispatch(getStudentData())
+                dispatch(getStudentDataByToken())
             }
             else{
                 errorPopup('Something wrong!!')
@@ -42,7 +54,7 @@ export const addSingleStudentData =  (value) => {
         dispatch(studentRequest());
         axios.post(`${ApiHttp}/student/addOne` , value , headers).then(res => {
             if(res.data.isSuccess){
-                dispatch(getStudentData())
+                dispatch(getStudentDataByToken())
                 successPopup(res.data.message)
             }
             else{
@@ -58,7 +70,7 @@ export const deleteSingleStudentData =  (id) => {
         axios.delete(`${ApiHttp}/student/deleteOne?id=${id}`).then(res => {
             if(res.data.isSuccess){
                 successPopup(res.data.message)
-                dispatch(getStudentData())
+                dispatch(getStudentDataByToken())
             }
             else{
                 errorPopup(res.data.message)
@@ -74,11 +86,39 @@ export const deleteMultipleStudentData =  (data) => {
         axios.post(`${ApiHttp}/student/deleteMany` , {deleteManyId : data}).then(res => {
             if(res.data.isSuccess){
                 successPopup(res.data.message)
-                dispatch(getStudentData())
+                dispatch(getStudentDataByToken())
             }
             else{
                 errorPopup(res.data.message)
             }
+        })
+    }
+}
+
+export const studentLogin = (value) => {
+    return async (dispatch) => {
+        dispatch(studentRequest());
+        await axios.post(`${ApiHttp}/student/login` , value).then(res => {
+           if(res.data.isSuccess == true){
+               localStorage.setItem('student' , res.data.token);
+                localStorage.removeItem('superAdmin');
+                localStorage.removeItem('teacher');
+                localStorage.removeItem('admin');
+               Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Login successfull',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              successPopup('Login Successful.')
+              setTimeout(() => {
+                  window.location.href = '/';
+              }, 1500);
+           }
+           else{
+            errorPopup(res.data.message);
+           }
         })
     }
 }

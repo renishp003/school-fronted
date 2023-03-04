@@ -9,10 +9,12 @@ function SuperAdminLogin() {
     const LoginSuperAdmin = (data) => {
       
 
-      axios.post(`${ApiHttp}/superAdmin/login` , data).then((res) =>{
+      axios.post(`${ApiHttp}/school/login` , data).then((res) =>{
         if(res.data.isSuccess){
           successPopup(res.data.message)
           localStorage.setItem('superAdmin',true);
+          localStorage.removeItem('admin');
+          localStorage.removeItem('teacher');
           setTimeout(() => {
             window.location.href = '/superAdmin';
           }, 2500);
